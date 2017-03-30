@@ -4,12 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WcfEnsFx.Core
 {
-    class Utils
+    internal class Utils
     {
         [Conditional("DEBUG")]
         public static void DisplayHostInfo(ServiceHostBase host)
@@ -43,25 +41,22 @@ namespace WcfEnsFx.Core
             const BindingFlags flags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
 
             var type = typeof(T);
-            var methods = new List<MethodInfo>(typeof(T).GetMethods(flags));
+            var methods = new List<MethodInfo>(type.GetMethods(flags));
 
-            foreach (Type t in type.GetInterfaces())
+            foreach (var t in type.GetInterfaces())
             {
-                foreach (MethodInfo m in t.GetMethods(flags))
-                {
-                    methods.Add(m);
-                }
+                methods.AddRange(t.GetMethods(flags));
             }
 
-            var operations = new List<string>(methods.Count);
+            var operations = new HashSet<string>();
 
-            Action<MethodInfo> add = method =>
+            foreach (var method in methods)
             {
-                Debug.Assert(!operations.Contains(method.Name));
-                operations.Add(method.Name);
-            };
-
-            Array.ForEach(methods.ToArray(), add);
+                if (!operations.Contains(method.Name))
+                {
+                    operations.Add(method.Name);
+                }
+            }
 
             return operations.ToArray();
         }
@@ -82,22 +77,15 @@ namespace WcfEnsFx.Core
             return null;
         }
 
-        static Type[] GetArgsTypes(object[] args)
+        private static Type[] GetArgsTypes(IReadOnlyList<object> args)
         {
-            var paramNum = args == null ? 0 : args.Length;
+            var paramNum = args?.Count ?? 0;
 
             var types = new Type[paramNum];
 
             for (var i = 0; i < paramNum; i++)
             {
-                if (args != null)
-                {
-                    types[i] = args[i].GetType();
-                }
-                else
-                {
-                    types[i] = null;
-                }
+                types[i] = args?[i] != null ? args[i].GetType() : null;
             }
 
             return types;

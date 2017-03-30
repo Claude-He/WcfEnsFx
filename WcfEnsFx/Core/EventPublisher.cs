@@ -10,14 +10,14 @@ namespace WcfEnsFx.Core
 {
     public abstract class EventPublisher<T> where T : class
     {
-        readonly SubscriptionManager<T> subscriptionManager;
+        readonly SubscriptionServer<T> subscriptionManager;
 
-        SubscriptionManager<T> SubscriptionManager
+        SubscriptionServer<T> SubscriptionManager
         {
             get { return subscriptionManager; }
         }
 
-        public EventPublisher(SubscriptionManager<T> subscriptionManager)
+        public EventPublisher(SubscriptionServer<T> subscriptionManager)
         {
             if (null == subscriptionManager)
             {

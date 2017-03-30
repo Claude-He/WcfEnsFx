@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="https://github.com/Claude-He/WcfEnsFx" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="https://github.com/Claude-He/WcfEnsFx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://github.com/Claude-He/WcfEnsFx/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="https://github.com/Claude-He/WcfEnsFx" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMyService_Subscribe_InputMessage">
+    <wsdl:part xmlns:q1="http://tempuri.org/" name="parameters" element="q1:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_Subscribe_OutputMessage">
+    <wsdl:part xmlns:q2="http://tempuri.org/" name="parameters" element="q2:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_Unsubscribe_InputMessage">
+    <wsdl:part xmlns:q3="http://tempuri.org/" name="parameters" element="q3:Unsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_Unsubscribe_OutputMessage">
+    <wsdl:part xmlns:q4="http://tempuri.org/" name="parameters" element="q4:UnsubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_GetTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTime" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_GetTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_DemoEvent_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DemoEvent" />
+  </wsdl:message>
+  <wsdl:message name="IMyService_DemoEvent_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DemoEventResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMyService">
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnsSubscription/Subscribe" message="tns:IMyService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnsSubscription/SubscribeResponse" message="tns:IMyService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEnsSubscription/Unsubscribe" message="tns:IMyService_Unsubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEnsSubscription/UnsubscribeResponse" message="tns:IMyService_Unsubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTime">
+      <wsdl:input wsaw:Action="https://github.com/Claude-He/WcfEnsFx/IMyService/GetTime" message="tns:IMyService_GetTime_InputMessage" />
+      <wsdl:output wsaw:Action="https://github.com/Claude-He/WcfEnsFx/IMyService/GetTimeResponse" message="tns:IMyService_GetTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DemoEvent">
+      <wsdl:output wsaw:Action="https://github.com/Claude-He/WcfEnsFx/IMyService/DemoEvent" message="tns:IMyService_DemoEvent_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="https://github.com/Claude-He/WcfEnsFx/IMyService/DemoEventResponse" message="tns:IMyService_DemoEvent_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace WcfEnsFx.Core
 {
-    public delegate void ServiceStateChanged(CommunicationState currentState);
+    public delegate void ServiceStateChangedEventHandler(CommunicationState newState);
 
-    public delegate void SubscriptionStateChanged(SubscriberState currentState);
+    public delegate void SubscriptionStateChangedEventHandler(SubscriberState currentState);
 
     public enum SubscriberState
     {

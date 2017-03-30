@@ -9,30 +9,31 @@ using System.Threading.Tasks;
 
 namespace WcfEnsFx.Core
 {
-    public abstract class SubscriptionManager<T> where T : class
+    public abstract class SubscriptionServer<T>: IEnsSubscription 
+        where T : class
     {
         public EventHandler OnSubscriberChanged;
 
         /// <summary>
         /// Keyed by event name and the value is the set of subscribers of the event.
         /// </summary>
-        readonly Dictionary<string, Dictionary<int, Subscription<T>>> SubscribedMethods
+        private readonly Dictionary<string, Dictionary<int, Subscription<T>>> subscribedMethods
             = new Dictionary<string, Dictionary<int, Subscription<T>>>();
 
-        readonly object Locker = new object();               
-        
-        public SubscriptionManager()
+        private readonly object locker = new object();
+
+        protected SubscriptionServer()
         {
             var methods = Utils.GetOperations<T>();
 
-            Action<string> insert = methodName => SubscribedMethods.Add(methodName, new Dictionary<int, Subscription<T>>());
+            Action<string> insert = methodName => subscribedMethods.Add(methodName, new Dictionary<int, Subscription<T>>());
 
             Array.ForEach(methods, insert);
         }
 
         public void Subscribe(string subscriberName, string eventName)
         {
-            lock (Locker)
+            lock (locker)
             {
                 var subscriber = OperationContext.Current.GetCallbackChannel<T>();
 
@@ -53,7 +54,7 @@ namespace WcfEnsFx.Core
 
         public void Unsubscribe(string eventName)
         {
-            lock (Locker)
+            lock (locker)
             {
                 var subscriber = OperationContext.Current.GetCallbackChannel<T>();
 
@@ -71,40 +72,40 @@ namespace WcfEnsFx.Core
                 }
             }
         }
-        
-        void AddSubscriber(T subscriber, string subscriberName, string eventOperation)
+
+        private void AddSubscriber(T subscriber, string subscriberName, string eventOperation)
         {
             var key = subscriber.GetHashCode();
 
-            lock (Locker)
+            lock (locker)
             {
-                var dic = SubscribedMethods[eventOperation];
+                var dic = subscribedMethods[eventOperation];
 
                 if (dic.ContainsKey(key)) return;
 
                 dic.Add(subscriber.GetHashCode(), new Subscription<T>(subscriberName, subscriber));
             }
 
-            if (OnSubscriberChanged != null) OnSubscriberChanged(null, null);
+            OnSubscriberChanged?.Invoke(null, null);
         }
 
-        void RemoveSubscriber(T subscriber, string eventOperation)
+        private void RemoveSubscriber(T subscriber, string eventOperation)
         {
-            lock (Locker)
+            lock (locker)
             {
-                var dic = SubscribedMethods[eventOperation];
+                var dic = subscribedMethods[eventOperation];
 
                 if (!dic.Remove(subscriber.GetHashCode())) return;
             }
 
-            if (OnSubscriberChanged != null) OnSubscriberChanged(null, null);
+            OnSubscriberChanged?.Invoke(null, null);
         }
 
         internal void RemoveSubscriber(T subscriber)
         {
-            lock (Locker)
+            lock (locker)
             {
-                foreach (var dic in SubscribedMethods.Values.Where(dic => dic.ContainsKey(subscriber.GetHashCode())))
+                foreach (var dic in subscribedMethods.Values.Where(dic => dic.ContainsKey(subscriber.GetHashCode())))
                 {
                     dic.Remove(subscriber.GetHashCode());
                 }
@@ -113,11 +114,11 @@ namespace WcfEnsFx.Core
 
         internal T[] GetSubscribers(string eventName)
         {
-            lock (Locker)
+            lock (locker)
             {
-                if (!SubscribedMethods.ContainsKey(eventName)) return new T[] { };
+                if (!subscribedMethods.ContainsKey(eventName)) return new T[] { };
 
-                var dic = SubscribedMethods[eventName];
+                var dic = subscribedMethods[eventName];
 
                 return dic.Select(v => v.Value.Subscriber).ToArray();
             }
