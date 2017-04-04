@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="u0hJhajVact7UkNaIjLIm+sEJgg=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ZA+sftpiUBj47g6lWTrvOkatzdo=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="netNamedPipeBinding" name="NetNamedPipeBinding_IMyService">
+    <bindingConfiguration bindingType="netNamedPipeBinding" name="NetNamedPipeBinding_IMyEvent">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetNamedPipeBinding_IMyService</serializedValue>
+          <serializedValue>NetNamedPipeBinding_IMyEvent</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -74,10 +74,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IMyService">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IMyEvent">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IMyService</serializedValue>
+          <serializedValue>NetTcpBinding_IMyEvent</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -192,10 +192,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="wsDualHttpBinding" name="WSDualHttpBinding_IMyService">
+    <bindingConfiguration bindingType="wsDualHttpBinding" name="WSDualHttpBinding_IMyEvent">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WSDualHttpBinding_IMyService</serializedValue>
+          <serializedValue>WSDualHttpBinding_IMyEvent</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -288,10 +288,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IMyService" contract="ServiceReference.IMyService" bindingType="netTcpBinding" address="net.tcp://localhost:7002/MySubscriptionService" bindingConfiguration="NetTcpBinding_IMyService">
+    <endpoint name="NetTcpBinding_IMyEvent" contract="PublishServiceRef.IMyEvent" bindingType="netTcpBinding" address="net.tcp://localhost:7003/MyPublishService" bindingConfiguration="NetTcpBinding_IMyEvent">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:7002/MySubscriptionService</serializedValue>
+          <serializedValue>net.tcp://localhost:7003/MyPublishService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -300,10 +300,10 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IMyService</serializedValue>
+          <serializedValue>NetTcpBinding_IMyEvent</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReference.IMyService</serializedValue>
+          <serializedValue>PublishServiceRef.IMyEvent</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -363,7 +363,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IMyService</serializedValue>
+          <serializedValue>NetTcpBinding_IMyEvent</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -373,10 +373,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="WSDualHttpBinding_IMyService" contract="ServiceReference.IMyService" bindingType="wsDualHttpBinding" address="http://localhost:7004/MySubscriptionService" bindingConfiguration="WSDualHttpBinding_IMyService">
+    <endpoint name="WSDualHttpBinding_IMyEvent" contract="PublishServiceRef.IMyEvent" bindingType="wsDualHttpBinding" address="http://localhost:7005/MyPublishService" bindingConfiguration="WSDualHttpBinding_IMyEvent">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:7004/MySubscriptionService</serializedValue>
+          <serializedValue>http://localhost:7005/MyPublishService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -385,10 +385,10 @@
           <serializedValue>wsDualHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WSDualHttpBinding_IMyService</serializedValue>
+          <serializedValue>WSDualHttpBinding_IMyEvent</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReference.IMyService</serializedValue>
+          <serializedValue>PublishServiceRef.IMyEvent</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -448,7 +448,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WSDualHttpBinding_IMyService</serializedValue>
+          <serializedValue>WSDualHttpBinding_IMyEvent</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -458,10 +458,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetNamedPipeBinding_IMyService" contract="ServiceReference.IMyService" bindingType="netNamedPipeBinding" address="net.pipe://localhost/MySubscriptionService" bindingConfiguration="NetNamedPipeBinding_IMyService">
+    <endpoint name="NetNamedPipeBinding_IMyEvent" contract="PublishServiceRef.IMyEvent" bindingType="netNamedPipeBinding" address="net.pipe://localhost/MyPublishService" bindingConfiguration="NetNamedPipeBinding_IMyEvent">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.pipe://localhost/MySubscriptionService</serializedValue>
+          <serializedValue>net.pipe://localhost/MyPublishService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -470,10 +470,10 @@
           <serializedValue>netNamedPipeBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetNamedPipeBinding_IMyService</serializedValue>
+          <serializedValue>NetNamedPipeBinding_IMyEvent</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReference.IMyService</serializedValue>
+          <serializedValue>PublishServiceRef.IMyEvent</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -533,7 +533,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetNamedPipeBinding_IMyService</serializedValue>
+          <serializedValue>NetNamedPipeBinding_IMyEvent</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

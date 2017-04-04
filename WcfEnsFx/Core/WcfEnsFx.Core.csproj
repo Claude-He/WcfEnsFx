@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="EnsService.cs" />
     <Compile Include="EventRelayService.cs" />
+    <Compile Include="ISubscriberCollection.cs" />
     <Compile Include="PublishServer.cs" />
     <Compile Include="ServerState\BaseState.cs" />
     <Compile Include="Service.cs" />

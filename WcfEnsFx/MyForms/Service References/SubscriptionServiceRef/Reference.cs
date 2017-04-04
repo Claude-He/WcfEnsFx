@@ -8,26 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyTcpSubscriber.ServiceReference {
+namespace MyForms.SubscriptionServiceRef {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="https://github.com/Claude-He/WcfEnsFx", ConfigurationName="ServiceReference.IMyService", CallbackContract=typeof(MyTcpSubscriber.ServiceReference.IMyServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="https://github.com/Claude-He/WcfEnsFx", ConfigurationName="SubscriptionServiceRef.IMyService", CallbackContract=typeof(MyForms.SubscriptionServiceRef.IMyServiceCallback))]
     public interface IMyService {
         
         // CODEGEN: Generating message contract since the wrapper namespace (http://tempuri.org/) of message SubscribeRequest does not match the default value (https://github.com/Claude-He/WcfEnsFx)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnsSubscription/Subscribe", ReplyAction="http://tempuri.org/IEnsSubscription/SubscribeResponse")]
-        MyTcpSubscriber.ServiceReference.SubscribeResponse Subscribe(MyTcpSubscriber.ServiceReference.SubscribeRequest request);
+        MyForms.SubscriptionServiceRef.SubscribeResponse Subscribe(MyForms.SubscriptionServiceRef.SubscribeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnsSubscription/Subscribe", ReplyAction="http://tempuri.org/IEnsSubscription/SubscribeResponse")]
-        System.Threading.Tasks.Task<MyTcpSubscriber.ServiceReference.SubscribeResponse> SubscribeAsync(MyTcpSubscriber.ServiceReference.SubscribeRequest request);
+        System.Threading.Tasks.Task<MyForms.SubscriptionServiceRef.SubscribeResponse> SubscribeAsync(MyForms.SubscriptionServiceRef.SubscribeRequest request);
         
         // CODEGEN: Generating message contract since the wrapper namespace (http://tempuri.org/) of message UnsubscribeRequest does not match the default value (https://github.com/Claude-He/WcfEnsFx)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnsSubscription/Unsubscribe", ReplyAction="http://tempuri.org/IEnsSubscription/UnsubscribeResponse")]
-        MyTcpSubscriber.ServiceReference.UnsubscribeResponse Unsubscribe(MyTcpSubscriber.ServiceReference.UnsubscribeRequest request);
+        MyForms.SubscriptionServiceRef.UnsubscribeResponse Unsubscribe(MyForms.SubscriptionServiceRef.UnsubscribeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEnsSubscription/Unsubscribe", ReplyAction="http://tempuri.org/IEnsSubscription/UnsubscribeResponse")]
-        System.Threading.Tasks.Task<MyTcpSubscriber.ServiceReference.UnsubscribeResponse> UnsubscribeAsync(MyTcpSubscriber.ServiceReference.UnsubscribeRequest request);
+        System.Threading.Tasks.Task<MyForms.SubscriptionServiceRef.UnsubscribeResponse> UnsubscribeAsync(MyForms.SubscriptionServiceRef.UnsubscribeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="https://github.com/Claude-He/WcfEnsFx/IMyService/GetTime", ReplyAction="https://github.com/Claude-He/WcfEnsFx/IMyService/GetTimeResponse")]
         System.DateTime GetTime();
@@ -40,7 +40,10 @@ namespace MyTcpSubscriber.ServiceReference {
     public interface IMyServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="https://github.com/Claude-He/WcfEnsFx/IMyService/DemoEvent", ReplyAction="https://github.com/Claude-He/WcfEnsFx/IMyService/DemoEventResponse")]
-        void DemoEvent(string eventMessage);
+        void DemoEvent(string strArg);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="https://github.com/Claude-He/WcfEnsFx/IMyService/DemoEventWithInt", ReplyAction="https://github.com/Claude-He/WcfEnsFx/IMyService/DemoEventWithIntResponse")]
+        void DemoEventWithInt(string strArg, int intArg);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -102,12 +105,12 @@ namespace MyTcpSubscriber.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMyServiceChannel : MyTcpSubscriber.ServiceReference.IMyService, System.ServiceModel.IClientChannel {
+    public interface IMyServiceChannel : MyForms.SubscriptionServiceRef.IMyService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MyServiceClient : System.ServiceModel.DuplexClientBase<MyTcpSubscriber.ServiceReference.IMyService>, MyTcpSubscriber.ServiceReference.IMyService {
+    public partial class MyServiceClient : System.ServiceModel.DuplexClientBase<MyForms.SubscriptionServiceRef.IMyService>, MyForms.SubscriptionServiceRef.IMyService {
         
         public MyServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -130,49 +133,49 @@ namespace MyTcpSubscriber.ServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        MyTcpSubscriber.ServiceReference.SubscribeResponse MyTcpSubscriber.ServiceReference.IMyService.Subscribe(MyTcpSubscriber.ServiceReference.SubscribeRequest request) {
+        MyForms.SubscriptionServiceRef.SubscribeResponse MyForms.SubscriptionServiceRef.IMyService.Subscribe(MyForms.SubscriptionServiceRef.SubscribeRequest request) {
             return base.Channel.Subscribe(request);
         }
         
         public void Subscribe(string subscriberName, string eventName) {
-            MyTcpSubscriber.ServiceReference.SubscribeRequest inValue = new MyTcpSubscriber.ServiceReference.SubscribeRequest();
+            MyForms.SubscriptionServiceRef.SubscribeRequest inValue = new MyForms.SubscriptionServiceRef.SubscribeRequest();
             inValue.subscriberName = subscriberName;
             inValue.eventName = eventName;
-            MyTcpSubscriber.ServiceReference.SubscribeResponse retVal = ((MyTcpSubscriber.ServiceReference.IMyService)(this)).Subscribe(inValue);
+            MyForms.SubscriptionServiceRef.SubscribeResponse retVal = ((MyForms.SubscriptionServiceRef.IMyService)(this)).Subscribe(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<MyTcpSubscriber.ServiceReference.SubscribeResponse> MyTcpSubscriber.ServiceReference.IMyService.SubscribeAsync(MyTcpSubscriber.ServiceReference.SubscribeRequest request) {
+        System.Threading.Tasks.Task<MyForms.SubscriptionServiceRef.SubscribeResponse> MyForms.SubscriptionServiceRef.IMyService.SubscribeAsync(MyForms.SubscriptionServiceRef.SubscribeRequest request) {
             return base.Channel.SubscribeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<MyTcpSubscriber.ServiceReference.SubscribeResponse> SubscribeAsync(string subscriberName, string eventName) {
-            MyTcpSubscriber.ServiceReference.SubscribeRequest inValue = new MyTcpSubscriber.ServiceReference.SubscribeRequest();
+        public System.Threading.Tasks.Task<MyForms.SubscriptionServiceRef.SubscribeResponse> SubscribeAsync(string subscriberName, string eventName) {
+            MyForms.SubscriptionServiceRef.SubscribeRequest inValue = new MyForms.SubscriptionServiceRef.SubscribeRequest();
             inValue.subscriberName = subscriberName;
             inValue.eventName = eventName;
-            return ((MyTcpSubscriber.ServiceReference.IMyService)(this)).SubscribeAsync(inValue);
+            return ((MyForms.SubscriptionServiceRef.IMyService)(this)).SubscribeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        MyTcpSubscriber.ServiceReference.UnsubscribeResponse MyTcpSubscriber.ServiceReference.IMyService.Unsubscribe(MyTcpSubscriber.ServiceReference.UnsubscribeRequest request) {
+        MyForms.SubscriptionServiceRef.UnsubscribeResponse MyForms.SubscriptionServiceRef.IMyService.Unsubscribe(MyForms.SubscriptionServiceRef.UnsubscribeRequest request) {
             return base.Channel.Unsubscribe(request);
         }
         
         public void Unsubscribe(string eventName) {
-            MyTcpSubscriber.ServiceReference.UnsubscribeRequest inValue = new MyTcpSubscriber.ServiceReference.UnsubscribeRequest();
+            MyForms.SubscriptionServiceRef.UnsubscribeRequest inValue = new MyForms.SubscriptionServiceRef.UnsubscribeRequest();
             inValue.eventName = eventName;
-            MyTcpSubscriber.ServiceReference.UnsubscribeResponse retVal = ((MyTcpSubscriber.ServiceReference.IMyService)(this)).Unsubscribe(inValue);
+            MyForms.SubscriptionServiceRef.UnsubscribeResponse retVal = ((MyForms.SubscriptionServiceRef.IMyService)(this)).Unsubscribe(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<MyTcpSubscriber.ServiceReference.UnsubscribeResponse> MyTcpSubscriber.ServiceReference.IMyService.UnsubscribeAsync(MyTcpSubscriber.ServiceReference.UnsubscribeRequest request) {
+        System.Threading.Tasks.Task<MyForms.SubscriptionServiceRef.UnsubscribeResponse> MyForms.SubscriptionServiceRef.IMyService.UnsubscribeAsync(MyForms.SubscriptionServiceRef.UnsubscribeRequest request) {
             return base.Channel.UnsubscribeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<MyTcpSubscriber.ServiceReference.UnsubscribeResponse> UnsubscribeAsync(string eventName) {
-            MyTcpSubscriber.ServiceReference.UnsubscribeRequest inValue = new MyTcpSubscriber.ServiceReference.UnsubscribeRequest();
+        public System.Threading.Tasks.Task<MyForms.SubscriptionServiceRef.UnsubscribeResponse> UnsubscribeAsync(string eventName) {
+            MyForms.SubscriptionServiceRef.UnsubscribeRequest inValue = new MyForms.SubscriptionServiceRef.UnsubscribeRequest();
             inValue.eventName = eventName;
-            return ((MyTcpSubscriber.ServiceReference.IMyService)(this)).UnsubscribeAsync(inValue);
+            return ((MyForms.SubscriptionServiceRef.IMyService)(this)).UnsubscribeAsync(inValue);
         }
         
         public System.DateTime GetTime() {

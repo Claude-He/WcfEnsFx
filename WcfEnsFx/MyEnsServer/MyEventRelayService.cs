@@ -8,14 +8,14 @@ namespace MyEnsServer
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     internal class MyEventRelayService : EventRelayService<IMyEvent>, IMyEvent
     {
-        public void DemoEvent(string eventMessage)
+        public void DemoEvent(string strArg)
         {
-            RelayEvent(eventMessage);
+            RelayEvent(strArg);
         }
 
-        public void DemoEvent(string eventMessage, int intParam)
+        public void DemoEvent(string strArg, int intArg)
         {
-            RelayEvent(eventMessage, intParam);
+            RelayEvent(strArg, intArg);
         }
     }
 }

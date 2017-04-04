@@ -27,7 +27,7 @@ namespace MyPublisher
         private void btnEventWithNumber_Click(object sender, EventArgs e)
         {
             var number = Convert.ToInt32(txtEventNumber.Text);
-            new MyEventClient().DemoEvent(txtEventMessage.Text, number);
+            new MyEventClient().DemoEventWithInt(txtEventMessage.Text, number);
         }
     }
 }

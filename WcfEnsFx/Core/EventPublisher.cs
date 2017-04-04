@@ -10,21 +10,16 @@ namespace WcfEnsFx.Core
 {
     public abstract class EventPublisher<T> where T : class
     {
-        readonly SubscriptionServer<T> subscriptionManager;
+        private ISubscriberCollection<T> SubscriptionManager { get; }
 
-        SubscriptionServer<T> SubscriptionManager
-        {
-            get { return subscriptionManager; }
-        }
-
-        public EventPublisher(SubscriptionServer<T> subscriptionManager)
+        protected EventPublisher(SubscriptionServer<T> subscriptionManager)
         {
             if (null == subscriptionManager)
             {
                 throw new ArgumentNullException(nameof(subscriptionManager));
             }
 
-            this.subscriptionManager = subscriptionManager;
+            SubscriptionManager = subscriptionManager;
         }
 
         public void BroadcastLocalEvent(string eventName, params object[] args)

@@ -7,6 +7,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using WcfEnsFx.Core;
 
 namespace WcfEnsFx.Core
 {
@@ -19,35 +20,90 @@ namespace WcfEnsFx.Core
         public event ServiceStateChangedEventHandler PublishServiceStateChanged;
 
         public event ServiceStateChangedEventHandler SubscriptionServiceStateChanged;
+   
+        public CommunicationState SubscriptionServerState => SubscriptionHost.State;
 
-        //ServiceWrapper<TP, TE> publishSvcHost = new ServiceWrapper<TP, TE>();
-        //ServiceWrapper<TS, TI> subscriptionSvcHost = new ServiceWrapper<TS, TI>();
+        public CommunicationState PublishServerState => PublishHost.State;
 
-        public CommunicationState SubscriptionServerState => subscriptionHost.State;
+        private ServiceHost SubscriptionHost { get; set; }
 
-        public CommunicationState PublishServerState => publishHost.State;
+        private ServiceHost PublishHost { get; set; }
 
-        private readonly ServiceHost subscriptionHost;
-
-        private readonly ServiceHost publishHost;
-        
         public EnsService()
         {
-            var subscriptionServerInstance = new TS();
+            CreateSubscriptionServiceHost();
 
-            subscriptionHost = new ServiceHost(subscriptionServerInstance);
-            RegistrEvents(subscriptionHost, OnSubscriptionServiceStateChanged);
+            CreatePublishServiceHost();
+        }
+
+        #region Programmatically add End Point to the two service hosts
+        // Overload more if needed...
+        public ServiceEndpoint AddSubscriptionServiceEndpoint(Binding binding, string address)
+        {
+            return SubscriptionHost.AddServiceEndpoint(typeof(TI), binding, address);
+        }
+
+        public ServiceEndpoint AddPublishServiceEndpoint(Binding binding, string address)
+        {
+            return PublishHost.AddServiceEndpoint(typeof(TE), binding, address);
+        }
+
+
+        #endregion
+
+        public void CreateSubscriptionServiceHost()
+        {
+            if (!AbleToCreateHost(SubscriptionHost))
+            {
+                throw new InvalidOperationException();
+            }
+
+            SubscriptionHost = new ServiceHost(new TS());
+            RegistrEvents(SubscriptionHost, OnSubscriptionServiceStateChanged);
+        }
+
+        public void CreatePublishServiceHost()
+        {
+            if (!AbleToCreateHost(PublishHost))
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (!IsSubscriptionServiceWorkable())
+            {
+                throw new InvalidOperationException("");
+            }
 
             var tp = new TP
             {
-                SubscriptionServer = subscriptionServerInstance
+                SubscriptionServer = (TS)SubscriptionHost.SingletonInstance
             };
 
-            publishHost = new ServiceHost(tp);
-            RegistrEvents(publishHost, OnPublishServiceStateChanged);
+            PublishHost = new ServiceHost(tp);
+            RegistrEvents(PublishHost, OnPublishServiceStateChanged);
         }
 
-        private static void RegistrEvents(ServiceHost host, EventHandler handler)
+        private bool IsSubscriptionServiceWorkable()
+        {
+            return SubscriptionServerState == CommunicationState.Created ||
+                   SubscriptionServerState == CommunicationState.Opened ||
+                   SubscriptionServerState == CommunicationState.Opening;
+        }
+
+        private static bool AbleToCreateHost(ICommunicationObject host)
+        {
+            return host == null ||
+                   host.State == CommunicationState.Faulted ||
+                   host.State == CommunicationState.Closed ||
+                   host.State == CommunicationState.Closing;
+        }
+
+        private static bool IsServiceHostWorking(ICommunicationObject host)
+        {
+            return host != null && (host.State == CommunicationState.Opened || host.State == CommunicationState.Opening);
+        }
+
+        private static void RegistrEvents(ICommunicationObject host, EventHandler handler)
         {
             host.Opened += handler;
             host.Opening += handler;
@@ -56,46 +112,61 @@ namespace WcfEnsFx.Core
             host.Faulted += handler;
         }
 
-        public ServiceEndpoint AddSubscriptionServiceEndpoint(Binding binding, string address)
+        private static void UnregistrEvents(ICommunicationObject host, EventHandler handler)
         {
-            return subscriptionHost.AddServiceEndpoint(typeof(TI), binding, address);
-        }
-
-        public ServiceEndpoint AddPublishServiceEndpoint(Binding binding, string address)
-        {
-            return publishHost.AddServiceEndpoint(typeof(TE), binding, address);
+            host.Opened -= handler;
+            host.Opening -= handler;
+            host.Closing -= handler;
+            host.Closed -= handler;
+            host.Faulted -= handler;
         }
 
         public void OpenSubscriptionService()
         {
-            subscriptionHost.Open();
+            SubscriptionHost.Open();
         }
 
         public void CloseSubscriptionService()
         {
-            subscriptionHost.Close();
+            SubscriptionHost.Close();
+            UnregistrEvents(SubscriptionHost, OnSubscriptionServiceStateChanged);
+
+            ((TS) SubscriptionHost.SingletonInstance).RemoveAllSubscribers();
+
+            if (PublishServerState == CommunicationState.Opened ||
+                PublishServerState == CommunicationState.Opening)
+            {
+                ClosePublishService();
+            }
         }
 
         public void OpenPublishService()
         {
+            if (!IsServiceHostWorking(SubscriptionHost))
+            {
+                //It's meaningless to open publish service if related subcription service is not working.
+                //throw new InvalidOperationException();
+            }
 
-            publishHost.Open();
+            PublishHost.Open();
         }
 
         public void ClosePublishService()
         {
-            publishHost.Close();
+            PublishHost.Close();
+
+            UnregistrEvents(PublishHost, OnPublishServiceStateChanged);
         }
 
 
         protected void OnSubscriptionServiceStateChanged(object sender, EventArgs e)
         {
-            SubscriptionServiceStateChanged?.Invoke(subscriptionHost.State);
+            SubscriptionServiceStateChanged?.Invoke(SubscriptionHost.State);
         }
 
         protected void OnPublishServiceStateChanged(object sender, EventArgs e)
         {
-            PublishServiceStateChanged?.Invoke(publishHost.State);
+            PublishServiceStateChanged?.Invoke(PublishHost.State);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace WcfEnsFx.Core
 {
     public abstract class EventRelayService<T> where T: class
     {
-        internal SubscriptionServer<T> SubscriptionServer { get; set; }
+        internal ISubscriberCollection<T> SubscriptionServer { get; set; }
 
         protected virtual void RelayEvent(params object[] args)
         {

@@ -6,7 +6,7 @@ namespace WcfEnsFx.Core
 {
     public abstract class PublishServer<T> where T : class
     {
-        SubscriptionServer<T> SubscriptionServer { get; set; }
+        ISubscriberCollection<T> SubscriptionServer { get; set; }
 
         /// <summary>
         /// Raise event to every subscribers of specified event.
@@ -40,16 +40,9 @@ namespace WcfEnsFx.Core
 
             var type = typeof(T);
 
-            var methodInfo = Utils.GetMethod(typeof(T), methodName, args);
+            var methodInfo = Utils.GetMethod(type, methodName, args);
 
-            try
-            {
-                methodInfo.Invoke(subscriber, args);
-            }
-            catch
-            {
-                throw;
-            }
+            methodInfo.Invoke(subscriber, args);
         }
 
 

@@ -6,10 +6,11 @@ using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WcfEnsFx.Core;
 
 namespace WcfEnsFx.Core
 {
-    public abstract class SubscriptionServer<T>: IEnsSubscription 
+    public abstract class SubscriptionServer<T>: IEnsSubscription, ISubscriberCollection<T>
         where T : class
     {
         public EventHandler OnSubscriberChanged;
@@ -17,7 +18,7 @@ namespace WcfEnsFx.Core
         /// <summary>
         /// Keyed by event name and the value is the set of subscribers of the event.
         /// </summary>
-        private readonly Dictionary<string, Dictionary<int, Subscription<T>>> subscribedMethods
+        private Dictionary<string, Dictionary<int, Subscription<T>>> SubscribedMethods { get; }
             = new Dictionary<string, Dictionary<int, Subscription<T>>>();
 
         private readonly object locker = new object();
@@ -26,7 +27,7 @@ namespace WcfEnsFx.Core
         {
             var methods = Utils.GetOperations<T>();
 
-            Action<string> insert = methodName => subscribedMethods.Add(methodName, new Dictionary<int, Subscription<T>>());
+            Action<string> insert = methodName => SubscribedMethods.Add(methodName, new Dictionary<int, Subscription<T>>());
 
             Array.ForEach(methods, insert);
         }
@@ -79,7 +80,7 @@ namespace WcfEnsFx.Core
 
             lock (locker)
             {
-                var dic = subscribedMethods[eventOperation];
+                var dic = SubscribedMethods[eventOperation];
 
                 if (dic.ContainsKey(key)) return;
 
@@ -93,7 +94,7 @@ namespace WcfEnsFx.Core
         {
             lock (locker)
             {
-                var dic = subscribedMethods[eventOperation];
+                var dic = SubscribedMethods[eventOperation];
 
                 if (!dic.Remove(subscriber.GetHashCode())) return;
             }
@@ -101,27 +102,40 @@ namespace WcfEnsFx.Core
             OnSubscriberChanged?.Invoke(null, null);
         }
 
-        internal void RemoveSubscriber(T subscriber)
+        void ISubscriberCollection<T>.RemoveSubscriber(T subscriber)
         {
             lock (locker)
             {
-                foreach (var dic in subscribedMethods.Values.Where(dic => dic.ContainsKey(subscriber.GetHashCode())))
+                foreach (var method in SubscribedMethods.Values.Where(dic => dic.ContainsKey(subscriber.GetHashCode())))
                 {
-                    dic.Remove(subscriber.GetHashCode());
+                    method.Remove(subscriber.GetHashCode());
                 }
             }
         }
 
-        internal T[] GetSubscribers(string eventName)
+        internal void RemoveAllSubscribers()
         {
             lock (locker)
             {
-                if (!subscribedMethods.ContainsKey(eventName)) return new T[] { };
+                foreach (var method in SubscribedMethods.Values)
+                {
+                    method.Clear();
+                }
+            }
+        }
 
-                var dic = subscribedMethods[eventName];
+        T[] ISubscriberCollection<T>.GetSubscribers(string eventName)
+        {
+            lock (locker)
+            {
+                if (!SubscribedMethods.ContainsKey(eventName)) return new T[] { };
+
+                var dic = SubscribedMethods[eventName];
 
                 return dic.Select(v => v.Value.Subscriber).ToArray();
             }
         }
+
+        
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -9,10 +8,9 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyContract;
-using MyTcpSubscriber.ServiceReference;
+using MyForms.SubscriptionServiceRef;
 
-namespace MyTcpSubscriber
+namespace MyForms
 {
     public partial class FSubscriber : Form, IMyServiceCallback
     {
@@ -82,6 +80,6 @@ namespace MyTcpSubscriber
             }
         }
 
-      
+
     }
 }

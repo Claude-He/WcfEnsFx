@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="52e45bc5-9eb3-4307-9834-d4382181231f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9a2e30bd-c866-418b-b0db-db92ceb4c783" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:8800/MEX_SUB" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WcfEnsFx.wsdl" MetadataType="Wsdl" ID="e559cbf9-5e71-42fe-91a5-2ba6cc84308b" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d354146c-522a-4a0d-a0c1-8bb1f3deae60" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b92603ff-263c-4ccd-a2d6-cedad60cc864" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="583989c3-3e60-4519-af99-768508c14fe9" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
-    <MetadataFile FileName="WcfEnsFx.xsd" MetadataType="Schema" ID="a6a0dabc-1a4c-434a-aa47-3a3427b042b6" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
+    <MetadataFile FileName="WcfEnsFx.wsdl" MetadataType="Wsdl" ID="3c478dfc-f3e8-4e1c-956e-1c02dcec269e" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="290b0559-a57f-4b81-a05f-ecc8c536dbab" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e64d1501-b12a-47e7-a1a2-99c801f49de7" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="8f6062fc-2f56-4a53-90d9-d3386a5eed47" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
+    <MetadataFile FileName="WcfEnsFx.xsd" MetadataType="Schema" ID="439be705-6fee-4a0f-b3fa-26db7d3296c3" SourceId="1" SourceUrl="http://localhost:8800/MEX_SUB" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

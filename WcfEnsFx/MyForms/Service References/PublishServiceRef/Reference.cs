@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyPublisher.ServiceReference {
+namespace MyForms.PublishServiceRef {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="https://github.com/Claude-He/WcfEnsFx", ConfigurationName="ServiceReference.IMyEvent")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="https://github.com/Claude-He/WcfEnsFx", ConfigurationName="PublishServiceRef.IMyEvent")]
     public interface IMyEvent {
         
         [System.ServiceModel.OperationContractAttribute(Action="https://github.com/Claude-He/WcfEnsFx/IMyEvent/DemoEvent", ReplyAction="https://github.com/Claude-He/WcfEnsFx/IMyEvent/DemoEventResponse")]
@@ -29,12 +29,12 @@ namespace MyPublisher.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMyEventChannel : MyPublisher.ServiceReference.IMyEvent, System.ServiceModel.IClientChannel {
+    public interface IMyEventChannel : MyForms.PublishServiceRef.IMyEvent, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MyEventClient : System.ServiceModel.ClientBase<MyPublisher.ServiceReference.IMyEvent>, MyPublisher.ServiceReference.IMyEvent {
+    public partial class MyEventClient : System.ServiceModel.ClientBase<MyForms.PublishServiceRef.IMyEvent>, MyForms.PublishServiceRef.IMyEvent {
         
         public MyEventClient() {
         }

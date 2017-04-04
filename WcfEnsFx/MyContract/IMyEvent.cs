@@ -6,9 +6,9 @@ namespace MyContract
     public interface IMyEvent
     {
         [OperationContract]
-        void DemoEvent(string eventMessage);
+        void DemoEvent(string strArg);
 
         [OperationContract(Name = "DemoEventWithInt")]
-        void DemoEvent(string eventMessage, int intParam);
+        void DemoEvent(string strArg, int intArg); 
     }
 }
