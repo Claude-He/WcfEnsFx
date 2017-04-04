@@ -16,9 +16,11 @@ namespace MyForms
     {
         private MyServiceClient Client { get; }
 
-        public FSubscriber()
+        public FSubscriber(string bindingType)
         {
             InitializeComponent();
+
+            Text = bindingType;
 
             Client = new MyServiceClient(new InstanceContext(this));
         }

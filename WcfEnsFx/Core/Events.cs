@@ -8,16 +8,4 @@ using System.Threading.Tasks;
 namespace WcfEnsFx.Core
 {
     public delegate void ServiceStateChangedEventHandler(CommunicationState newState);
-
-    public delegate void SubscriptionStateChangedEventHandler(SubscriberState currentState);
-
-    public enum SubscriberState
-    {
-        Disconnecting,
-        Disconnected,
-        Connecting,
-        Connected,
-        Subscribed,
-        Faulted
-    }
 }

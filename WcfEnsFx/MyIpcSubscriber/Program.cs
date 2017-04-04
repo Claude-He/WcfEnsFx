@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MyForms;
+using System;
 using System.Windows.Forms;
-using MyForms;
 
-namespace MyTcpSubscriber
+namespace MyIpcSubscriber
 {
     static class Program
     {
@@ -17,7 +14,7 @@ namespace MyTcpSubscriber
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FSubscriber("NetTcpBinding"));
+            Application.Run(new FSubscriber("NamedPipeBinding"));
         }
     }
 }

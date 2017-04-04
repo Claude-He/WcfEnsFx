@@ -11,6 +11,13 @@ using WcfEnsFx.Core;
 
 namespace WcfEnsFx.Core
 {
+    /// <summary>
+    /// Event
+    /// </summary>
+    /// <typeparam name="TS"></typeparam>
+    /// <typeparam name="TI"></typeparam>
+    /// <typeparam name="TP"></typeparam>
+    /// <typeparam name="TE"></typeparam>
     public class EnsService<TS, TI, TP, TE>
         where TS : SubscriptionServer<TE>, IEnsSubscription, TI, new()
         where TI : IEnsSubscription

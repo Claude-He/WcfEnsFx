@@ -74,13 +74,13 @@ namespace WcfEnsFx.Core
             }
         }
 
-        private void AddSubscriber(T subscriber, string subscriberName, string eventOperation)
+        private void AddSubscriber(T subscriber, string subscriberName, string eventName)
         {
             var key = subscriber.GetHashCode();
 
             lock (locker)
             {
-                var dic = SubscribedMethods[eventOperation];
+                var dic = SubscribedMethods[eventName];
 
                 if (dic.ContainsKey(key)) return;
 
@@ -90,11 +90,11 @@ namespace WcfEnsFx.Core
             OnSubscriberChanged?.Invoke(null, null);
         }
 
-        private void RemoveSubscriber(T subscriber, string eventOperation)
+        private void RemoveSubscriber(T subscriber, string eventName)
         {
             lock (locker)
             {
-                var dic = SubscribedMethods[eventOperation];
+                var dic = SubscribedMethods[eventName];
 
                 if (!dic.Remove(subscriber.GetHashCode())) return;
             }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace WcfEnsFx.Core
 {
     [DataContract]
-    public class Subscription<T> where T : class
+    internal class Subscription<T> where T : class
     {
         readonly T subscriber;
         string subscriberName;

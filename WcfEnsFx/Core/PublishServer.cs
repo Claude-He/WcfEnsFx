@@ -11,11 +11,11 @@ namespace WcfEnsFx.Core
         /// <summary>
         /// Raise event to every subscribers of specified event.
         /// </summary>
-        /// <param name="eventOperation">Name of event to be broadcasted.</param>
-        /// <param name="args">args</param>
-        public void BroadcastLocalEvent(string eventOperation, params object[] args)
+        /// <param name="eventName">Name of event to be broadcasted.</param>
+        /// <param name="args">Event arguments</param>
+        public void BroadcastLocalEvent(string eventName, params object[] args)
         {
-            RaiseEvent(eventOperation, args);
+            RaiseEvent(eventName, args);
         }
 
         void RaiseEvent(string methodName, object[] args)

@@ -34,12 +34,7 @@ namespace WcfEnsFx.Core
             PublishEvent(subscribers, eventName, args);
         }
 
-        /// <summary>
-        /// Currently publish event to those subscribed.
-        /// </summary>
-        /// <param name="subscribers"></param>
-        /// <param name="eventName"></param>
-        /// <param name="args"></param>
+       
         void PublishEvent(T[] subscribers, string eventName, object[] args)
         {
             Debug.Assert(subscribers != null);
